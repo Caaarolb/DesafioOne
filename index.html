@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decodificador de Texto</title>
+    <style>
+        body {
+            background: #FCE4EC; /* Fundo rosa claro */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-panel {
+            flex: 2;
+            margin-right: 20px;
+            padding: 20px;
+        }
+
+        .right-panel {
+            flex: 1;
+            background: #F8BBD0; /* Rosa médio */
+            padding: 40px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #text-input {
+            width: 100%;
+            height: 60%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 1px solid #F48FB1; /* Rosa um pouco mais escuro */
+            border-radius: 10px;
+            resize: none;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #text-output {
+            width: 100%;
+            height: 50%;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 1px solid #F48FB1;
+            border-radius: 10px;
+            resize: none;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+            background: #FCE4EC; /* Rosa claro */
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1em;
+            border-radius: 10px;
+            border: 1px solid #F48FB1; /* Rosa escuro */
+            background: white;
+            color: #F48FB1;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #F48FB1;
+            color: white;
+        }
+
+        #copy-button {
+            background-color: #F48FB1;
+            color: white;
+            border: none;
+            margin-top: 20px;
+        }
+
+        #copy-button:hover {
+            background-color: #EC407A; /* Rosa mais escuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <textarea id="text-input" placeholder="Digite o texto aqui..."></textarea>
+            <div class="buttons">
+                <button onclick="criptografar()">Criptografar</button>
+                <button onclick="descriptografar()">Descriptografar</button>
+            </div>
+        </div>
+        <div class="right-panel">
+            <textarea id="text-output" readonly placeholder="Resultado..."></textarea>
+            <button id="copy-button" onclick="copiarTexto()">Copiar</button>
+        </div>
+    </div>
+
+    <script>
+        function criptografar() {
+            let texto = document.getElementById('text-input').value.toLowerCase();
+            let textoCriptografado = texto.replace(/e/g, "enter")
+                                          .replace(/i/g, "imes")
+                                          .replace(/a/g, "ai")
+                                          .replace(/o/g, "ober")
+                                          .replace(/u/g, "ufat");
+            document.getElementById('text-output').value = textoCriptografado;
+        }
+
+        function descriptografar() {
+            let texto = document.getElementById('text-input').value.toLowerCase();
+            let textoDescriptografado = texto.replace(/enter/g, "e")
+                                             .replace(/imes/g, "i")
+                                             .replace(/ai/g, "a")
+                                             .replace(/ober/g, "o")
+                                             .replace(/ufat/g, "u");
+            document.getElementById('text-output').value = textoDescriptografado;
+        }
+
+        function copiarTexto() {
+            let textoCopiado = document.getElementById('text-output');
+            textoCopiado.select();
+            textoCopiado.setSelectionRange(0, 99999); // Para dispositivos móveis
+            document.execCommand("copy");
+            alert("Texto copiado para a área de transferência!");
+        }
+    </script>
+</body>
+</html>
